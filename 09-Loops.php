@@ -13,12 +13,45 @@
     <p>Executa ações repetidas vezes <b>enquanto</b>a condição for <b>verdadeira</b>.</p>
     <?php 
     $i = 1;
-    while($i <=5){
+    while($i <= 5):
     ?>
        <p>Parágrafo: <?= $i  ?></p>
        <?php
-       $i++;
-endwhile;}
+       $i++; 
+    endwhile;
        ?>
+       <hr>
+
+       <h2>do/white (faça/enquanto)</h2>
+       <p>Executa ações pelo menos <b>uma vez</b> e, se a condição for verdadeira, contínua executando outras vezes</p>
+      <?php
+      $j =1;
+      do{
+      ?>
+          <div>   
+                 <h3>Título qualquer...</h3>
+                 <p>Bloco <?= $j ?></p>
+
+          </div> 
+
+          <?php $j++; 
+          } while ($j <= 3) 
+          ?>
+
+          <hr>
+
+          <h2>for (para)</h2>
+          <p>Executa ações de acordo com uma <b>quantidade determinada de vezes</b>. </p>
+
+          <section>
+            <h3>Conteúdo da seção</h3>
+            <?php for($i = 1; $i <= 5; $i++){ //ou :
+            ?>
+            <details>
+                <summary><?= $i ?> </summary>
+                <p>Resposta <?= $i ?></p>
+            </details>
+            <?php } // ou endfor; ?>
+          </section>
 </body>
 </html>
