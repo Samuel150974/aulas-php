@@ -10,6 +10,17 @@
     <div class="container">
         <h1>Loops para estruturas de dados</h1>
         <hr>
+ <?php
+ $meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"];
+?>
+
+    <h2>Usando o loop for para acessar o array</h2>
+    <ol>
+        <?php for($i = 0; $i < count($meses); $i++){?>
+        <li><?= $meses[$i] ?></li>
+        <?php }?>
+
+    </ol>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script> 
 </body>
