@@ -11,17 +11,51 @@
       <h1>Estruturas de repetição (loops) e estruturas de dados</h1>
       
       <?php
-           $linguagens = ["HTML","CSS","JS","PHP","SQL"];
-      ?>
+           $linguagens = [ 
+           [
+           "id" =>1,
+           "nome"=>"HTML", 
+           "descrição" => "Estruturação" 
+           ],
 
-       <ol>
-        <?php for ($i = 0; $i < count ($linguagens); $i++):?>
+           [
+           "id" =>2,
+           "nome"=>"CSS", 
+           "descrição" => "Estilos" 
+           ],
+
+           [
+           "id" =>3,
+           "nome"=>"JS", 
+           "descrição" => "Comportamentos" 
+           ],
+
+           [
+           "id" =>4,
+           "nome"=>"PHP", 
+           "descrição" => "Back-End" 
+           ],
+           
+           [
+           "id" =>5,
+           "nome"=>"SQL", 
+           "descrição" => "Manipulação de dados" 
+           ]
+           ];
+     
+        foreach($linguagens as $chaves => $valores):
+          ?>
+          
+          <?php
+          endforeach;
+
+          foreach($linguagens as $valores): 
+          ?>
+           
+
+      
 
 
-        
-        <?php endfor ?>
-        
-       </ol>
 
 
 
@@ -40,12 +74,11 @@
 
 
 
-
+       
 
 
     </div>
       
-
 
 
 
