@@ -50,6 +50,7 @@
         <p>Resultado 3: <?= somar(2, 10.5) ?> </p>
 
         <?php  
+        
 
         // Variável de escopo GLOBAL
         $precoProdutoA = 250;
@@ -60,7 +61,7 @@
         $resultadoProdutos = somar($precoProdutoA, $precoProdutoB);
         ?>
         
-        <p>Resultado:4 <?= $resultadoProdutos ?></p>
+        <p>Resultado 4:   <?= $resultadoProdutos ?></p>
 
         <!-- Utilizando função como parte de condição de um if -->
 
@@ -93,11 +94,31 @@
             }
             ?>
 
-
 <p>Número 10: <?= verificarNegativo(10) ?></p>
 <p>Número -10: <?= verificarNegativo(-10) ?></p>
 <!-- <p> Teste para erro ?= verificarNegativo("teste") ?></p> -->
 
+<hr>
+
+
+<h2>Função anônima (ou lambda)</h2>
+<?php //  Sempre declare primeiro a função de chamar
+$multiplicar = function(float $valor1, float $valor2):float{
+return $valor1 * $valor2;
+};
+?>
+
+<!--  Repare no uso do $ junto com o nome da função -->
+<p>Exemplo: <?= $multiplicar (10,2) ?></p>
+
+<hr>
+
+<h2>Arrow Function</h2>
+<?php
+$subtrair = fn(float $valor1, float $valor2):float => $valor1 - $valor2;
+?>
+
+<p>Exemplo: <?= $subtrair(10, 1) ?></p>
 
 
 
@@ -112,7 +133,11 @@
 
 
 
-            </div>
+
+
+
+
+</div>
 
 
 
