@@ -20,15 +20,18 @@
     $nota2 = 2;
     $nota3 = 7;
 
-    function calcularMedia($n1, $n2, $n3)
+    function calcularMedia(float $n1, float $n2, float $n3)
     {
         return ($n1 + $n2 + $n3) / 3; // retornar o valor da média
     }
 
-    function verificarSituacao($m)
-    {
+    $media =  calcularMedia($nota1, $nota2, $nota3);
+  
+    $situacao = verificarSituacao($media);
 
-        if ($m >= 7) { 
+    function verificarSituacao(float $m): string
+    {
+        if ($m >= 7) {
             return "aprovado";
         } else {
             return "reprovado";
@@ -44,36 +47,34 @@
     // mostrar o resultado da média
     // mostrar o resultado da situação
 
-    ?> 
+    ?>
 
-     <h3>Avaliando as notas</h3>
+    <h3>Avaliando as notas</h3>
 
-     <p>Resultado 1: <?= $nota1 ?></p>
-     <p>Resultado 1: <?= $nota2 ?></p>
-     <p>Resultado 1: <?= $nota3 ?></p>
-     
-     <?php  
-     
+    <p>Resultado 1: <?= $nota1 ?></p>
+    <p>Resultado 1: <?= $nota2 ?></p>
+    <p>Resultado 1: <?= $nota3 ?></p>
 
-     $media =  calcularMedia($nota1, $nota2, $nota3);
-     
-     $situacao= verificarSituacao($media);
-     
-     ?>
-     
-     <p> resultado: <?= $media ?></p>
-     <p>situação: <?= $situacao ?></p>
+    <?php
 
 
-     
 
 
-     
+    ?>
 
-     
-     
-     
-     
+    <p> resultado: <?= $media ?></p>
+    <p>situação: <?= $situacao ?></p>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
