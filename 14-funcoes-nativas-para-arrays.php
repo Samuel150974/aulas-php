@@ -47,9 +47,36 @@
 
         <p>Variável <code>$nome</code> original:<?= $nome ?></p>
 
+        <hr>
 
+        <h2>array_sum</h2>
+        <p>Somando os valores de um array</p>
 
+        <?php
+        $carrinhoDeCompras = [
+           "TV_LED" => 1200,
+           "Ultrabook" => 2500,
+           "Geladeira" => 3000
+           ];
 
+           $total = array_sum($carrinhoDeCompras);
+        ?>
+              <p>Total: <?= $total ?></p>
+
+              <hr>
+
+              <h2>array_unique()</h2>
+              <p>Gera um novo array removendo elementos duplicados/repetidos em um array.</p>
+         
+              <?php
+              $categorias = ["Eletrônicos", "Livros", "Roupas", "Livros", "Games", "Eletrônicos"];
+
+              $categoriasUnicas = array_unique($categorias);
+
+               ?>
+
+               <pre><?php var_dump($categorias)?></pre>
+               <pre><?php var_dump($categoriasUnicas)?</pre>        
 
 
 
