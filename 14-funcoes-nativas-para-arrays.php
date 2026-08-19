@@ -92,40 +92,73 @@
                 $produtos = array_unique(
                     array_merge($produtosFilialNorte, $produtosFilialSul)
                 );
-                
+
                 ?>
                 
-                <pre><?php var_dump($produtos)?></pre>
-                <h2>array_combine()</h2>
-                <p>Cria um novo array a partir de uma lista de valores e uma lista de chaves</p>
+                <pre><?php var_dump($produtos) ?></pre>
 
-                <?php
-                // Lista de chaves
-                 $games = ["SuperMario","Sonic","Final_Fantasy"];
-                 
-                 // Lista de valores
-                 $precos = [99, 50, 129];
+        <hr>
 
-                 $catalogo = array_combine($games,$precos);
-                ?>
-                      <pre><?php var_dump($catalogo) ?></pre>
+        <h2>array_combine()</h2>
+        <p>Cria um novo array a partir de uma lista de valores e uma lista de chaves</p>
 
-                      <hr>
-                
-                      <h2>array_map()</h2>
-                      <p>Percorre cada elemento de um array, executa uma função (chmada de callback) e gera um novo array com os resultados.</p>
-                    <?php
-                    $catalogoComDesconto = array_map(function ($preco) {return $preco - $preco *0.10;
-                    },$catalogo);
-                    ?>
-                       
-                       <pre><?php var_dump ($catalogoComDesconto)?></pre>
+        <?php
+        // Lista de chaves
+        $games = ["SuperMario", "Sonic", "Final_Fantasy"];
+
+        // Lista de valores
+        $precos = [99, 50, 129];
+
+        $catalogo = array_combine($games, $precos);
+        ?>
+        <pre><?php var_dump($catalogo) ?></pre>
+
+        <hr>
+
+        <h2>array_map()</h2>
+        <p>Percorre cada elemento de um array, executa uma função (chmada de callback) e gera um novo array com os resultados.</p>
+        <?php
+        $catalogoComDesconto = array_map(function ($preco) {
+            return $preco - $preco * 0.10;
+        }, $catalogo);
+        ?>
+
+        <pre><?php var_dump($catalogoComDesconto) ?></pre>
+
+        <hr>
+        <h2>array_column()</h2>
+        <p>Retorna um novo array com os valores de uma determinada chave associativa.</p>
+
+        <?php
+        $servicos = [
+            ["codigo" => 3, "tipo" => "Limpeza", "status" => "Concluído"],
+            ["codigo" => 12, "tipo" => "Manutenção", "status" => "Concluído"],
+            ["codigo" => 1, "tipo" => "Reparo", "status" => "Pendente"],
+            ["codigo" => 7, "tipo" => "Consultoria", "status" => "Concluído"],
+            ["codigo" => 4, "tipo" => "Instalação", "status" => "Concluído"]
+        ];
 
 
-                      <hr>
+
+        $tipoServicos = array_column($servicos, "tipo");
+        ?>
+        <pre><?php var_dump($tipoServicos) ?></pre>
 
 
-                      <h2>array_filter</h2>
+
+
+        <hr>
+
+
+        <h2>array_filter()</h2>
+        <p>Retorna valores para um novo array baseado em alguma condição/critério.</p>
+
+        <?php
+        $servicosConcluidos = array_filter($servicos, fn(array $servico): bool => $servico["status"] === "Concluído");
+
+        ?>
+
+        <pre><?php var_dump($servicosConcluidos) ?></pre>
 
 
 
