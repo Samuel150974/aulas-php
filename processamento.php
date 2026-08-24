@@ -15,54 +15,125 @@
 
         <?php
         /* $_POST e $_GET
-Arrays superglobais que possuem os dados
-enviados a partir de formulários e/ou
-links dinâmicos. */
+        Arrays superglobais que possuem os dados
+        enviados a partir de formulários e/ou
+        links dinâmicos. */
 
-        //Verificando se houve requisição POST
+        // Lista de possíveis erros
+        $erros = [];
+
+        // Verificando se houve uma requisição POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Capturando os dados de cada campo
-            $nome = $_POST["nome"];
-            $email = $_POST["email"];
-            $idade = $_POST["idade"];
-            $mensagem = $_POST["mensagem"];
+            $nome = filter_input(INPUT_POST, 'nome');
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+            $idade = filter_input(INPUT_POST, 'idade', FILTER_SANITIZE_NUMBER_INT);
+            $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            /* Operador ?? -> coalescência nula
-Caso nenhum interesse seja selecionado, 
-a variável guardará um array vazio */
-            $interesses = $_POST["interesses"] ?? [];
+            /* Interesses */
+            $interessesValidos = ["html", "css", "javascript"];
 
-            // Caso nenhuma opção seja selecionada, o valor "nao" fica como padrão
-            $informativos = $_POST["informativos"] ?? "nao";
+            $interesses = filter_input(
+                INPUT_POST,
+                'interesses',
+                FILTER_SANITIZE_SPECIAL_CHARS,
+                FILTER_REQUIRE_ARRAY
+            ) ?? [];
+
+            if (!is_array($interesses)) {
+                $interesses = [];
+                $erros[] = "Seleção inválida de interesses";
+            }
+
+            // Comparar os dois arrays ( o do formulário e o válidos) checando se os valores "batem"
+            $interessesValidos = array_intersect($interesses, $interessesValidos);
+
+
+            //Comparar os dois arrays (o do formulário e o válidos) checando se os valores "batem"
+            $interessesValidados = array_intersect($interesses, $interessesValidos);
+
+            // // Caso nenhuma opção seja selecionada, o valor "nao" fica como padrão
+            // $informativos = $_POST["informativos"] ?? "nao";
+          
+          /* Informativos */
+      
+        //   Define uma de opçoes válidas conforme o formulário
+        $opcoesValidas = ["sim","nao"];
+
+        //Filtramos a entrada que o usuário escolheu
+        $informativos = filter_input(INPUT_POST,'informativos', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        //Verificamos se a escolha do usuário é uma das válidas.
+        // Se sim, usamos ela. Senão, usamos "nao"
+        $informativos = in_array($informativos, $opcoesValidas) ? $informativos : "nao";
+            
+        /* Validações (campos obrigatórios)*/
+        if(empty($nome)) $erros [] = "O campo nome é obrigatório";
+        if(empty($email)) $erros [] = "O e-mail deve ser informado";
+        if(empty($mensagem)) $erros [] = "Você deve descrever a mensagem";
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) $erros [] = "O e-mail não é válido";
+
+        $filtroIdade = [
+        "options" => [
+           "min_range" => 0,
+           "max_range" => 130,     
+        ]
+        ];
+
+        if(!filter_var($idade, FILTER_VALIDATE_INT, $filtroIdade)) {
+           $erros[] = "Idade inválida. A idade deve estar entre 0 e 130";  
+        }
+
+
+        if (!empty($erros)):
+
+
         ?>
 
-            <h2>Dados recebidos</h2>
-            <p>Nome: <?= $nome ?></p>
-            <p>E-mail: <?= $email ?></p>
-            <p>Idade: <?= $idade ?> anos</p>
-            <p>Mensagem: <?= $mensagem ?> </p>
+                <div class="alert alert-danger">
+                    <h2>Erros encontrados:</h2>
+                    <ul class="mb-3">
+                        <?php foreach ($erros as $erro): ?>
+                            <li><?= $erro ?></li>
 
-            <?php if (!empty($interesses)): ?>
-                <p>Interesses: <?= implode(", ", $interesses) ?></p>
-            <?php endif; ?>
+                        <?php endforeach ?>
 
-            <p>Informativos:
-                <?= $informativos === 'sim' ? "Sim" : "Não" ?>
-            </p>
-        <?php
+
+                    </ul>
+                    <a href="17-formulario.html" class="btn btn-warning">Voltar para o formulário</a>
+                </div>
+
+            <?php else: ?>
+                <h2>Dados recebidos</h2>
+                <p>Nome: <?= $nome ?></p>
+                <p>Email: <?= $email ?></p>
+                <p>Idade: <?= $idade ?> anos</p>
+                <p>Mensagem: <?= $mensagem ?></p>
+
+                <?php if (!empty($interesses)): ?>
+                    <p>Interesses: <?= implode(", ", $interesses) ?></p>
+                <?php endif; ?>
+
+                <p>Informativos:
+                    <?= $informativos === 'sim' ? "Sim" : "Não" ?>
+                </p>
+
+            <?php
+            endif;
         } else {
-        ?>
-             <!-- Acesso inválido (usuário não veio do formulário)  -->
-             <div class="alert alert-danger">
-              <h2>Acesso inválido!</h2>
-              <p>Você deve usar o formulário para enviar os dados.</p>
-              <hr>
-              <a href="17-formulario.html" class="btn btn-primary"> Ir para formulário.</a>
+            ?>
+            <!-- Acesso inválido (usuário não veio do formulário)  -->
+            <div class="alert alert-danger">
+                <h2>Acesso inválido!</h2>
+                <p>Você deve usar o formulário para enviar os dados.</p>
+                <hr>
+                <a href="17-formulario.html" class="btn btn-primary"> Ir para formulário.</a>
 
 
-             </div>
-             
+            </div>
+
         <?php
         }
         ?>
