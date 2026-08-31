@@ -9,7 +9,7 @@
 <body>
     <div class="container">
 
-        <h1>Cadastro de produtos</h1>
+        <h1>Central de encomendas</h1>
 
         <hr>
 
@@ -19,9 +19,32 @@
                 <input class = "form-control" type="text" name="name" id="nome"> 
             </div>
              <div class="mb-3">
-                <label class="form-label" for="fabricante">Fabricantes</label>
-                <input class = "form-control" type="search" name="fabricante" id="fabricante"> 
+                <label class="form-label" for="fabricantes">Fabricantes:</label>
+                <select name="fabricantes" id="fabricantes">
+                    <option value=""selected disabled></option>
+                    <option value="mobil">Mobil</option>
+                    <option value="ipiranga">Ipiranga</option>
+                    <option value="motul">Motul</option>
+                    <option value="yamalube">Yamalube</option>
+                </select>
             </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="preco">Preço:</label>
+                <input class = "form-control" type="number" name="preco" id="preco" min="100" max="10000" step="0.1"> 
+            </div>
+             
+            <div class="mb-3">
+                <label class="form-label" for="quantidade">Quantidade:</label>
+                <input class = "form-control" type="number" name="quantidade" id="quantidade" min="0" max="1000" step="0.1"> 
+            </div>
+
+         
+
+            <button type="submit" class="btn btn-primary">
+                Finalizar pedido
+
+            </button>
             
       
         </form>
